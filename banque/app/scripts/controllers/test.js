@@ -9,6 +9,11 @@
  */
 angular.module('banqueApp')
   .controller('TestCtrl', function ($scope, serviceAjax, $route) {
+    this.awesomeThings = [
+      'HTML5 Boilerplate',
+      'AngularJS',
+      'Karma'
+    ];
     $scope.users = {};
     $scope.loadUsers = function() {
     	serviceAjax.users().then(function(response) {

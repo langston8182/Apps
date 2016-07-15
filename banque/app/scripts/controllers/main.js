@@ -9,6 +9,11 @@
  */
 angular.module('banqueApp')
   .controller('MainCtrl', function ($scope, $location, serviceAjax, $window) {
+    this.awesomeThings = [
+      'HTML5 Boilerplate',
+      'AngularJS',
+      'Karma'
+    ];
     $scope.isActive = function(location) {
     	return (location === $location.path() ? "active" : "");
     };

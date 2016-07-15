@@ -37,17 +37,7 @@ module.exports = function (grunt) {
         files: ['bower.json'],
         tasks: ['wiredep']
       },
-      js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all', 'newer:jscs:all'],
-        options: {
-          livereload: '<%= connect.options.livereload %>'
-        }
-      },
-      jsTest: {
-        files: ['test/spec/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'newer:jscs:test', 'karma']
-      },
+      
       styles: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'postcss']
@@ -69,6 +59,14 @@ module.exports = function (grunt) {
 
     // The actual grunt server settings
     connect: {
+      server: {
+        options: {
+          keepalive: true,
+          port: 9000,
+          base: '.',
+          open:true
+        }
+      },
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
@@ -118,42 +116,9 @@ module.exports = function (grunt) {
       }
     },
 
-    // Make sure there are no obvious mistakes
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
-      },
-      all: {
-        src: [
-          'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
-        ]
-      },
-      test: {
-        options: {
-          jshintrc: 'test/.jshintrc'
-        },
-        src: ['test/spec/{,*/}*.js']
-      }
-    },
+    
 
-    // Make sure code styles are up to par
-    jscs: {
-      options: {
-        config: '.jscsrc',
-        verbose: true
-      },
-      all: {
-        src: [
-          'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
-        ]
-      },
-      test: {
-        src: ['test/spec/{,*/}*.js']
-      }
-    },
+   
 
     // Empties folders to start fresh
     clean: {
@@ -471,12 +436,11 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'server'
   ]);
 
   grunt.registerTask('default', [
-    'newer:jshint',
-    'newer:jscs',
     'test',
     'build'
   ]);

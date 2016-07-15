@@ -9,6 +9,11 @@
  */
 angular.module('banqueApp')
   .controller('AjouterCtrl', function ($scope, serviceAjax, $timeout) {
+    this.awesomeThings = [
+      'HTML5 Boilerplate',
+      'AngularJS',
+      'Karma'
+    ];
     $scope.ajouterUtilisateur = function() {
     	serviceAjax.ajout($scope.nom, $scope.prenom);
     	$scope.ajoutOK = "L'utilisateur à été ajouté";
