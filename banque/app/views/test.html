@@ -1,0 +1,40 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Utilisateurs</div>
+	<table class="table">
+		<tr ng-repeat="user in users">
+			<td>{{user.nom}}</td>
+			<td>{{user.prenom}}</td>
+			<td align="right"><button type="button" class="btn btn-danger" ng-click="supprimerUtilisateur(user._id)">Supprimer</button>
+			<button type="button" class="btn btn-warning" ng-click="loadUser(user._id)" data-toggle="modal" data-target="#exampleModal">Modifier</button>
+		</tr>
+    </table>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   	<div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="exampleModalLabel">Modification</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="nom" class="form-control-label">Nom : </label>
+              <input type="text" class="form-control" id="nom" ng-model="user.nom">
+            </div>
+            <div class="form-group">
+              <label for="prenom" class="form-control-label">Prenom : </label>
+              <input type="text" class="form-control" id="prenom" ng-model="user.prenom">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="modifierUtilisateur(user._id)">Valider</button>
+        </div>
+      </div>
+    </div>
+</div>

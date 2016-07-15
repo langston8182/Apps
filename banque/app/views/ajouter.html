@@ -1,0 +1,28 @@
+<form ng-submit="ajouterUtilisateur()" class="col-lg-10">
+	<legend>Ajout utilisateur</legend>
+	<label for="nom">Nom : </label>
+	<input type="text" ng-model="nom" class="form-control" />
+	<label for="prenom">Prénom : </label>
+	<input type="text" ng-model="prenom" class="form-control" />
+	<br />
+	<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Ajouter</button>
+</form>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-show="isOK">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Statut</h4>
+      </div>
+      <div class="modal-body">
+        Utilisateur ajouté
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
