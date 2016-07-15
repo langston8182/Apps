@@ -38,7 +38,7 @@ angular.module('banqueApp')
 
     $scope.modifierUtilisateur = function(id) {
     	serviceAjax.modifierUtilisateur(id, $scope.user.nom, $scope.user.prenom);
-    	window.location.reload();
+    	$scope.loadUsers();
     }
 
     $scope.loadUsers();

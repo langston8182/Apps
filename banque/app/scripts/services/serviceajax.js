@@ -30,10 +30,6 @@ angular.module('banqueApp')
       	return $http.get("http://localhost:3000/modifierUtilisateur?id=" + id + "&nom=" + nom + "&prenom=" + prenom);
       },
 
-      /*authenticate: function(login, mdp) {
-      	return $http.get("http://localhost:3000/login?id=" + login + "&mdp=" + mdp);
-      },*/
-
       login: function(user) {
       		var deferred = $q.defer();
       		$http.post("http://localhost:3000/login/", user).then(function(response) {
