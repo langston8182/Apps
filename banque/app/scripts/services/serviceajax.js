@@ -13,13 +13,13 @@ angular.module('banqueApp')
 
     return {
       users: function () {
-        return $http.get("http://localhost:3000/users/").then(function(response) {
+        return $http.get("http://localhost:3000/auth/users?token=" + userInfo.token).then(function(response) {
         	return response.data;
         });
       },
 
       supprime: function(id) {
-      	return $http.get("http://localhost:3000/supprime?id=" + id);
+      	return $http.get("http://localhost:3000/auth/supprime?id=" + id + "&token=" + userInfo.token);
       },
 
       user: function(id) {
@@ -38,7 +38,7 @@ angular.module('banqueApp')
       				login:response.data.login,
       				logged:true
       			};
-      			$window.sessionStorage['userInfo'] = JSON.stringify(userInfo);
+            $window.sessionStorage['userInfo'] = JSON.stringify(userInfo);
       			deferred.resolve(userInfo);
       		}, function(error) {
       			deferred.reject(error);
@@ -57,7 +57,7 @@ angular.module('banqueApp')
       },
 
       ajout: function(nom, prenom) {
-      	return $http.get("http://localhost:3000/ajout?nom=" + nom + "&prenom=" + prenom);
+      	return $http.get("http://localhost:3000/auth/ajout?nom=" + nom + "&prenom=" + prenom + "&token=" + userInfo.token);
       }
     };
   });

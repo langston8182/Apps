@@ -9,17 +9,41 @@ var config = require('./config');
 var User = require('./user');
 var Admin = require('./admin');
 
+var cors = require('cors');
 var ObjectID = require('mongodb').ObjectID;
 var url = 'mongodb://localhost:27017/banque';
 var jsonParser = bodyParser.json();
 var login = "admin";
 var mdp = "admin";
 var authRoute = express.Router(); 
-app.use('/', authRoute);
+app.use('/auth', authRoute);
+app.use(jsonParser);
+authRoute.use(jsonParser);
+app.use(cors());
+authRoute.use(cors());
 
 app.use(bodyParser.urlencoded())
 mongoose.connect(config.database);
 app.set('secret', config.secret);
+
+authRoute.use(function(req, res, next) {
+	var token = req.body.token || req.query.token || req.header['x-access-token'];
+	if (token) {
+		jwt.verify(token, app.get('secret'), function(err, decoded) {
+			if (err) {
+				return res.json({success: false, message: "Erreur d'authentification du token"});
+			} else {
+				req.decoded = decoded;
+				next();
+			}
+		});
+	} else {
+		return res.status(403).send({
+			success: false,
+			message: "Pas de token fournit"
+		});
+	}
+});
 
 app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -41,32 +65,17 @@ app.post('/login', jsonParser, function(req, res) {
 				res.json({success: false, message: "Mot de passe incorrect"});
 			} else {
 				var token = jwt.sign(admin, app.get('secret'), {
-					expiresIn: 1440 //24h
+					expiresIn: 1400 //24h
 				});
 				res.json({
 					success: true,
-					token: token
+					token: token,
+					login: login
 				});
 			}
 		}
 	});
 });
-
-/*app.post('/login', jsonParser, function(req, res) {
-	var loginReq = req.body.login;
-	console.log(loginReq);
-	var mdpReq = req.body.password;
-	var token;
-	if (loginReq == login && mdpReq == mdp) {
-		token = "azerty";
-	}
-	if (token) {
-		result = {token:token,login:loginReq};
-		res.json(result);
-	} else {
-		throw new Error("erreur");
-	}
-});*/
 
 authRoute.get('/users', function(req, res) {
 	User.find({}, function(err, users) {
@@ -83,15 +92,7 @@ app.get('/user', function(req, res){
 	});
 });
 
-/*app.get('/ajout', function(req, res) {
-	MongoClient.connect(url, function(err, db) {
-		var nom = req.query['nom'];
-		var prenom = req.query['prenom'];
-		db.collection('users').insertOne({nom:nom, prenom:prenom});
-		db.close();
-	});
-});*/
-app.get('/ajout', function(req, res) {
+authRoute.get('/ajout', function(req, res) {
 	var user = new User({
 		nom: req.query['nom'],
 		prenom: req.query['prenom']
@@ -104,7 +105,7 @@ app.get('/ajout', function(req, res) {
 	});
 });
 
-app.get('/modifierUtilisateur', function(req, res) {
+authRoute.get('/modifierUtilisateur', function(req, res) {
 	MongoClient.connect(url, function(err, db) {
 		var id = req.query['id'];
 		var nom = req.query['nom'];
