@@ -19,15 +19,20 @@ angular.module('banqueApp')
       },
 
       supprime: function(id) {
-      	return $http.get("http://localhost:3000/auth/supprime?id=" + id + "&token=" + userInfo.token);
+      	return $http.get("http://localhost:3000/auth/supprime?id=" + id + "&token=" + userInfo.token).then(function(response) {
+          return response.data;
+        });
       },
 
       user: function(id) {
-      	return $http.get("http://localhost:3000/user?id=" + id);
+      	return $http.get("http://localhost:3000/auth/user?id=" + id + "&token=" + userInfo.token);
       },
 
       modifierUtilisateur: function(id, nom, prenom) {
-      	return $http.get("http://localhost:3000/modifierUtilisateur?id=" + id + "&nom=" + nom + "&prenom=" + prenom);
+      	return $http.get("http://localhost:3000/auth/modifierUtilisateur?id=" + id + "&nom=" + nom + 
+          "&prenom=" + prenom + "&token=" + userInfo.token).then(function(response) {
+            return response.data;
+          });
       },
 
       login: function(user) {

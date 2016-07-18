@@ -59,10 +59,10 @@ app.post('/login', jsonParser, function(req, res) {
 			throw err;
 		}
 		if (!admin) {
-			res.json({success: false, message: "Utilisateur inconnu"});
+			res.status(401).send({success: false, message: "Utilisateur inconnu"});
 		} else if (admin) {
 			if (admin.password != req.body.password) {
-				res.json({success: false, message: "Mot de passe incorrect"});
+				res.status(401).send({success: false, message: "Mot de passe incorrect"});
 			} else {
 				var token = jwt.sign(admin, app.get('secret'), {
 					expiresIn: 1400 //24h
@@ -83,12 +83,13 @@ authRoute.get('/users', function(req, res) {
 	});
 });
 
-app.get('/user', function(req, res){
-	MongoClient.connect(url, function(err, db) {
-		var id = req.query['id'];
-		db.collection('users').find({_id:ObjectID(id)}).toArray(function(err, result) {
-			res.json(result);
-		});
+authRoute.get('/user', function(req, res) {
+	var id = req.query['id'];
+	User.find({_id: id}, function(err, user) {
+		if (err) {
+			throw err;
+		}
+		res.json(user);
 	});
 });
 
@@ -106,27 +107,36 @@ authRoute.get('/ajout', function(req, res) {
 });
 
 authRoute.get('/modifierUtilisateur', function(req, res) {
-	MongoClient.connect(url, function(err, db) {
-		var id = req.query['id'];
-		var nom = req.query['nom'];
-		var prenom = req.query['prenom'];
-		db.collection('users').updateOne({_id:ObjectID(id)}, 
-			{
-				nom:nom,
-				prenom:prenom
-			});
+	var id = req.query['id'];
+	var nom = req.query['nom'];
+	var prenom = req.query['prenom'];
+	User.findOne({_id: id}, function(err, user) {
+		if (err) {
+			throw err;
+		}
+		user.nom = nom;
+		user.prenom = prenom;
+		user.save(function(err) {
+			if (err) {
+				throw err;
+			}
+		});
+		res.json({success: true});
 	});
 });
 
-app.get('/supprime', function(req, res) {
-	MongoClient.connect(url, function(err, db) {
-		var id = req.query['id'];
-		db.collection('users').remove({_id:ObjectID(id)}, {safe:true}, function(err, result) {
+authRoute.get('/supprime', function(req, res) {
+	var id = req.query['id'];
+	User.findOne({_id: id}, function(err, user) {
+		if (err) {
+			throw err;
+		}
+		user.remove(function(err) {
 			if (err) {
-				console.log(err);
+				throw err;
 			}
 		});
-		db.close();
+		res.json({success: true});
 	});
 });
 

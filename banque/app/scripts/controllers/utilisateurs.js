@@ -17,15 +17,16 @@ angular.module('banqueApp')
     $scope.users = [];
     $scope.loadUsers = function() {
         serviceAjax.users().then(function(response) {
-    		$scope.users = response;
+            $scope.users = response;
     	}, function(error) {
     		console.log(error);
     	});
     };
 
     $scope.supprimerUtilisateur = function(id) {
-    	serviceAjax.supprime(id);
-    	$route.reload();
+    	serviceAjax.supprime(id).then(function(response) {
+            $scope.loadUsers();
+        });
     };
 
     $scope.loadUser = function(id) {
@@ -37,8 +38,9 @@ angular.module('banqueApp')
     };
 
     $scope.modifierUtilisateur = function(id) {
-    	serviceAjax.modifierUtilisateur(id, $scope.user.nom, $scope.user.prenom);
-    	$scope.loadUsers();
+    	serviceAjax.modifierUtilisateur(id, $scope.user.nom, $scope.user.prenom).then(function(response) {
+            $scope.loadUsers();
+        });
     }
 
     $scope.loadUsers();
