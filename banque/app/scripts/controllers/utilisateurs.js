@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name banqueApp.controller:TestCtrl
+ * @name banqueApp.controller:UtilisateursCtrl
  * @description
- * # TestCtrl
+ * # UtilisateursCtrl
  * Controller of the banqueApp
  */
 angular.module('banqueApp')
-  .controller('TestCtrl', function ($scope, serviceAjax, $route) {
+  .controller('UtilisateursCtrl', function ($scope, serviceAjax, $route) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

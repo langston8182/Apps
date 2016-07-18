@@ -68,10 +68,10 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
-      .when('/test', {
-        templateUrl: 'views/test.html',
-        controller: 'TestCtrl',
-        controllerAs: 'test',
+      .when('/utilisateurs', {
+        templateUrl: 'views/utilisateurs.html',
+        controller: 'UtilisateursCtrl',
+        controllerAs: 'utilisateurs',
       })
       .when('/ajouter', {
         templateUrl: 'views/ajouter.html',

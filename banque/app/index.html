@@ -39,11 +39,10 @@
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
             <ul class="nav navbar-nav">
               <li ng-class="isActive('/')"><a href="#/">Home</a></li>
-              <li ng-class="isActive('/test')" ng-show="userInfo.logged"><a ng-href="#/test">Utilisateurs</a></li>
-              <li ng-class="isActive('/ajouter')" ng-show="userInfo.logged"><a ng-href="#/ajouter">Ajouter</a></li>
+              <li ng-class="isActive('/utilisateurs')" ng-show="userInfo.token"><a ng-href="#/utilisateurs">Utilisateurs</a></li>
+              <li ng-class="isActive('/ajouter')" ng-show="userInfo.token"><a ng-href="#/ajouter">Ajouter</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li ng-show="!userInfo.logged"><a href="" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -95,7 +94,7 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
-        <script src="scripts/controllers/test.js"></script>
+        <script src="scripts/controllers/utilisateurs.js"></script>
         <script src="scripts/services/serviceajax.js"></script>
         <script src="scripts/controllers/ajouter.js"></script>
         <!-- endbuild -->
