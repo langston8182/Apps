@@ -14,7 +14,7 @@ angular.module('banqueApp')
       'AngularJS',
       'Karma'
     ];
-    $scope.users = {};
+    $scope.users = [];
     $scope.loadUsers = function() {
     	serviceAjax.users().then(function(response) {
     		$scope.users = response;
