@@ -16,7 +16,7 @@ angular.module('banqueApp')
     ];
     $scope.users = [];
     $scope.loadUsers = function() {
-    	serviceAjax.users().then(function(response) {
+        serviceAjax.users().then(function(response) {
     		$scope.users = response;
     	}, function(error) {
     		console.log(error);

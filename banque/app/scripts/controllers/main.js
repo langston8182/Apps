@@ -14,6 +14,7 @@ angular.module('banqueApp')
       'AngularJS',
       'Karma'
     ];
+    $scope.userInfo = angular.fromJson($window.sessionStorage['userInfo']);
     $scope.isActive = function(location) {
     	return (location === $location.path() ? "active" : "");
     };

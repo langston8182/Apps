@@ -9,7 +9,7 @@
  */
 angular.module('banqueApp')
   .factory('serviceAjax', function ($http, $q, $window) {
-    var userInfo;
+    var userInfo = angular.fromJson($window.sessionStorage['userInfo']);
 
     return {
       users: function () {
@@ -53,7 +53,7 @@ angular.module('banqueApp')
       },
 
       getUserInfo: function() {
-      		return userInfo;
+      		return angular.fromJson($window.sessionStorage['userInfo']);;
       },
 
       ajout: function(nom, prenom) {
