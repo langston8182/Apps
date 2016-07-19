@@ -15,7 +15,7 @@
     "angular-mocks": "^1.4.0"
   },
   "appPath": "app",
-  "moduleName": "banqueApp",
+  "moduleName": "appApp",
   "overrides": {
     "bootstrap": {
       "main": [

@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc overview
- * @name banqueApp
+ * @name appApp
  * @description
- * # banqueApp
+ * # appApp
  *
  * Main module of the application.
  */
@@ -12,7 +12,7 @@
 
 
 angular
-  .module('banqueApp', [
+  .module('appApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',

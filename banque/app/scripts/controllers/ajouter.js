@@ -7,7 +7,7 @@
  * # AjouterCtrl
  * Controller of the banqueApp
  */
-angular.module('banqueApp')
+angular.module('appApp')
   .controller('AjouterCtrl', function ($scope, serviceAjax, $timeout) {
     this.awesomeThings = [
       'HTML5 Boilerplate',

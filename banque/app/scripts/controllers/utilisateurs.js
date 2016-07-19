@@ -7,7 +7,7 @@
  * # UtilisateursCtrl
  * Controller of the banqueApp
  */
-angular.module('banqueApp')
+angular.module('appApp')
   .controller('UtilisateursCtrl', function ($scope, serviceAjax, $route) {
     this.awesomeThings = [
       'HTML5 Boilerplate',

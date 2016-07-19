@@ -5,9 +5,9 @@
  * @name banqueApp.serviceAjax
  * @description
  * # serviceAjax
- * Factory in the banqueApp.
+ * Factory in the appApp.
  */
-angular.module('banqueApp')
+angular.module('appApp')
   .factory('serviceAjax', function ($http, $q, $window) {
     var userInfo = angular.fromJson($window.sessionStorage['userInfo']);
 

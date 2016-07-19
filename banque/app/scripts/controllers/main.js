@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the banqueApp
  */
-angular.module('banqueApp')
+angular.module('appApp')
   .controller('MainCtrl', function ($scope, $location, serviceAjax, $window) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
