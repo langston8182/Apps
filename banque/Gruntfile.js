@@ -1,6 +1,3 @@
-// Generated on 2016-07-14 using generator-angular 0.15.1
-'use strict';
-
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
@@ -11,6 +8,7 @@ module.exports = function (grunt) {
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Automatically load required Grunt tasks
   require('jit-grunt')(grunt, {
@@ -54,6 +52,21 @@ module.exports = function (grunt) {
           '.tmp/styles/{,*/}*.css',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
+      }
+    },
+
+    jshint: {
+      options: {
+        reporter: require('jshint-stylish')
+      },
+      build: ['Gruntfile.js','<%= yeoman.app %>/scripts/**/*.js', 'server/**/*.js']
+    },
+
+    uglify: {
+      build: {
+          files: {
+            '<%= yeoman.dist %>/scripts/scripts.min.js': ['<%= yeoman.app %>/scripts/**/*.js', 'server/**/*.js']
+          }
       }
     },
 
@@ -235,32 +248,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // The following *-min tasks will produce minified files in the dist folder
-    // By default, your `index.html`'s <!-- Usemin block --> will take care of
-    // minification. These next options are pre-configured if you do not wish
-    // to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
-
     imagemin: {
       dist: {
         files: [{
@@ -437,10 +424,11 @@ module.exports = function (grunt) {
     'filerev',
     'usemin',
     'htmlmin',
-    'server'
+    'serve'
   ]);
 
   grunt.registerTask('default', [
-    'build'
+    'jshint',
+    'serve'
   ]);
 };

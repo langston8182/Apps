@@ -1,7 +1,6 @@
 var app = require('express')();
 var express = require('express');
 var bodyParser = require('body-parser');
-var MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
 var config = require('./config');
@@ -22,7 +21,7 @@ authRoute.use(jsonParser);
 app.use(cors());
 authRoute.use(cors());
 
-app.use(bodyParser.urlencoded())
+app.use(bodyParser.urlencoded());
 mongoose.connect(config.database);
 app.set('secret', config.secret);
 
@@ -84,7 +83,7 @@ authRoute.get('/users', function(req, res) {
 });
 
 authRoute.get('/user', function(req, res) {
-	var id = req.query['id'];
+	var id = req.query.id;
 	User.find({_id: id}, function(err, user) {
 		if (err) {
 			throw err;
@@ -95,8 +94,8 @@ authRoute.get('/user', function(req, res) {
 
 authRoute.get('/ajout', function(req, res) {
 	var user = new User({
-		nom: req.query['nom'],
-		prenom: req.query['prenom']
+		nom: req.query.nom,
+		prenom: req.query.prenom
 	});
 	user.save(function(err) {
 		if (err) {
@@ -107,9 +106,9 @@ authRoute.get('/ajout', function(req, res) {
 });
 
 authRoute.get('/modifierUtilisateur', function(req, res) {
-	var id = req.query['id'];
-	var nom = req.query['nom'];
-	var prenom = req.query['prenom'];
+	var id = req.query.id;
+	var nom = req.query.nom;
+	var prenom = req.query.prenom;
 	User.findOne({_id: id}, function(err, user) {
 		if (err) {
 			throw err;
@@ -126,7 +125,7 @@ authRoute.get('/modifierUtilisateur', function(req, res) {
 });
 
 authRoute.get('/supprime', function(req, res) {
-	var id = req.query['id'];
+	var id = req.query.id;
 	User.findOne({_id: id}, function(err, user) {
 		if (err) {
 			throw err;

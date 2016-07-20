@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc overview
  * @name banqueApp
@@ -27,7 +25,7 @@ angular
           element.modal('hide');
         }
       });
-    }
+    };
   })
   .directive("erreurLogin", function($timeout) {
     return {

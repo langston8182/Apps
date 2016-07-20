@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc service
  * @name banqueApp.serviceAjax
@@ -9,7 +7,7 @@
  */
 angular.module('banqueApp')
   .factory('serviceAjax', function ($http, $q, $window) {
-    var userInfo = angular.fromJson($window.sessionStorage['userInfo']);
+    var userInfo = angular.fromJson($window.sessionStorage.userInfo);
 
     return {
       users: function () {
@@ -43,7 +41,7 @@ angular.module('banqueApp')
       				login:response.data.login,
       				logged:true
       			};
-            $window.sessionStorage['userInfo'] = JSON.stringify(userInfo);
+            $window.sessionStorage.userInfo = JSON.stringify(userInfo);
       			deferred.resolve(userInfo);
       		}, function(error) {
       			deferred.reject(error);
@@ -54,11 +52,11 @@ angular.module('banqueApp')
       
       logout: function() {
       	userInfo = null;
-      	$window.sessionStorage['userInfo'] = null;
+      	$window.sessionStorage.userInfo = null;
       },
 
       getUserInfo: function() {
-      		return angular.fromJson($window.sessionStorage['userInfo']);;
+      		return angular.fromJson($window.sessionStorage.userInfo);
       },
 
       ajout: function(nom, prenom) {

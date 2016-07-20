@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name banqueApp.controller:AjouterCtrl
@@ -27,5 +25,5 @@ angular.module('banqueApp')
     		$scope.nom = "";
     		$scope.prenom = "";
     	}
-    }
+    };
   });

@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name banqueApp.controller:MainCtrl
@@ -14,14 +12,14 @@ angular.module('banqueApp')
       'AngularJS',
       'Karma'
     ];
-    $scope.userInfo = angular.fromJson($window.sessionStorage['userInfo']);
+    $scope.userInfo = angular.fromJson($window.sessionStorage.userInfo);
     $scope.isActive = function(location) {
     	return (location === $location.path() ? "active" : "");
     };
 
     $scope.authenticate = function() {
     	serviceAjax.login($scope.user).then(function(response) {
-    		$scope.userInfo = angular.fromJson($window.sessionStorage['userInfo']);
+    		$scope.userInfo = angular.fromJson($window.sessionStorage.userInfo);
     		$scope.$broadcast('userInfo',$scope.userInfo);
     		$location.path('/#/');
     	}, function(error) {
@@ -40,5 +38,5 @@ angular.module('banqueApp')
     	serviceAjax.logout();
     	$scope.userInfo = null;
     	$location.path('/#/');
-    }
+    };
   });

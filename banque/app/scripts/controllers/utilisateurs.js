@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name banqueApp.controller:UtilisateursCtrl
@@ -41,7 +39,7 @@ angular.module('banqueApp')
     	serviceAjax.modifierUtilisateur(id, $scope.user.nom, $scope.user.prenom).then(function(response) {
             $scope.loadUsers();
         });
-    }
+    };
 
     $scope.loadUsers();
   });
